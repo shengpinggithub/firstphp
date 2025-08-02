@@ -15,8 +15,9 @@ Route::get('/search', fn () => view('search'));
 // Search user by ID and email
 
 Route::get('/search-user/id/{id}', [InputController::class, 'show'])->name('user.search.id');
-
 Route::get('/search-user/email/{email}', [InputController::class, 'showByEmail'])->name('user.search.email');
+Route::get('/search-user/title/{title}', [InputController::class, 'searchByTitle'])->name('user.search.title');
+
 
 // Dashboard view
 Route::get('/dashboard', fn () => view('dashboard'))->name('dashboard');

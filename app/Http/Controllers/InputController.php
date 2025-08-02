@@ -88,4 +88,16 @@ class InputController extends Controller
 
         return response()->json(['message' => 'User deleted successfully']);
     }
+
+    public function searchByTitle($title)
+    {
+        $users = User::where('title', 'like', '%' . $title . '%')->get();
+
+        if ($users->isEmpty()) {
+            return response()->json(['error' => 'No users found'], 404);
+        }
+
+        return response()->json($users);
+    }
+
 }

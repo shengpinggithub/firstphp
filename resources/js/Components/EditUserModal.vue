@@ -1,20 +1,38 @@
 <template>
-  <div v-if="visible" class="modal-overlay">
+
+  <!-- <div v-if="visible" class="modal-overlay">
     <div class="modal-content">
       <h3>Edit User</h3>
+        <div class="form-group">
+        <label for="name">Name</label>
+        <input id="name" v-model="form.name" placeholder="Name" />
+        </div>
 
-      <input v-model="form.name" placeholder="Name" />
-      <input v-model="form.address" placeholder="Address" />
-      <input v-model="form.email" placeholder="Email" />
-      <input v-model="form.title" placeholder="Title" />
-      <input v-model="form.wage" type="number" placeholder="Wage" />
+        <div class="form-group">
+        <label for="address">Address</label>
+        <input id="address" v-model="form.address" placeholder="Address" />
+        </div>
+
+        <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" v-model="form.email" placeholder="Email" />
+        </div>
+
+        <div class="form-group">
+        <label for="title">Title</label>
+        <input id="title" v-model="form.title" placeholder="Title" />
+        </div>
+      <div class="form-group">
+          <label for="wage">Wage</label>
+          <input id="wage" v-model="form.wage" type="number" placeholder="Wage" />
+      </div>
 
       <div v-if="error" class="error-message">{{ error }}</div>
 
       <button @click="saveUser">Save</button>
       <button @click="close">Cancel</button>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script setup>
@@ -63,7 +81,33 @@ const close = () => {
 defineExpose({ fetchUser })
 </script>
 
-<style scoped>
+<!-- <style scoped>
+
+label {
+  background-color: yellow !important;
+  color: black !important;
+  display: block !important;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+    background-color: yellow;
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
 .modal-overlay {
   position: fixed;
   top: 0; left: 0;
@@ -84,4 +128,4 @@ defineExpose({ fetchUser })
   margin-top: 1rem;
   color: red;
 }
-</style>
+</style> -->

@@ -11,13 +11,13 @@
         <span class="tool-icon">⚙️</span>
         <div class="tooltip">
           <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem;">
-            <a href="#" @click.prevent="openEditModal" style="display: flex; align-items: center; gap: 0.5rem; color: #007bff;">
-              <i class="fas fa-edit"></i>
-              Edit
+            <a href="#" @click.prevent="openEditModal" style="display: flex; align-items: center; gap: 0.5rem; color: #000000;">
+              <i class="fas fa-pencil-edit"></i>
+              ✏️  Edit
             </a>
-            <a href="#" @click.prevent="deleteUser" style="display: flex; align-items: center; gap: 0.5rem; color: #dc3545;">
-              <i class="fas fa-trash"></i>
-              Delete
+            <a href="#" @click.prevent="deleteUser" style="display: flex; align-items: center; gap: 0.5rem; color: #000000;">
+              <i class="fas fa-trash-alt"></i>
+              🗑️ Delete
             </a>
           </div>
         </div>
@@ -28,14 +28,32 @@
     <div v-if="showModal" class="modal-overlay">
       <div class="modal-content">
         <h3>Edit User</h3>
-        <input v-model="form.name" placeholder="Name" />
-        <input v-model="form.address" placeholder="Address" />
-        <input v-model="form.email" placeholder="Email" />
-        <input v-model="form.title" placeholder="Title" />
-        <input v-model="form.wage" type="number" placeholder="Wage" />
+        <div class="form-group">
+          <label>Name: </label>
+          <input v-model="form.name" placeholder="Name" />
+        </div>
+        <div class="form-group">
+          <label>Address: </label>
+          <input v-model="form.address" placeholder="Address" />
+        </div>
+        <div class="form-group">
+          <label>Email: </label>
+          <input v-model="form.email" placeholder="Email" />
+        </div>
+        <div class="form-group">
+          <label>Title: </label>
+          <input v-model="form.title" placeholder="Title" />
+        </div>
+        <div class="form-group">
+          <label>Wage: </label>
+          <input v-model="form.wage" type="number" placeholder="Wage" />
+        </div>
 
-        <button @click="saveUser">Save</button>
-        <button @click="closeModal">Cancel</button>
+        <div class="button-group">
+          <button @click="saveUser">Save</button>
+          <button @click="closeModal">Cancel</button>
+        </div>
+
       </div>
     </div>
 
@@ -120,6 +138,55 @@ const deleteUser = () => {
 </script>
 
 <style scoped>
+.tool-icon {
+  font-size: 32px; 
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px; 
+  margin-top: 24px; 
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+label {
+  width: 120px;
+  text-align: right;
+  margin-right: 16px;
+  font-weight: bold;
+}
+
+input {
+  width: 400px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.tooltip {
+  position: absolute;
+  right: 50;
+  top: 100%;
+  background: white;
+  border: 5px solid #ccc;
+  padding: 8px;
+  display: none;
+  width: 80px;
+}
+
+.modal-content {
+  width: 400px; 
+  padding: 24px;
+  background: white;
+  border-radius: 8px;
+}
+
 .user-box {
   display: flex;
   justify-content: space-between;
@@ -149,6 +216,15 @@ const deleteUser = () => {
   display: none;
 }
 
+.tooltip a {
+  text-decoration: none;
+  color: black;
+}
+
+.tooltip a:hover {
+  color: #333; /* Optional: slightly darker on hover */
+}
+
 .tool-icon-wrapper:hover .tooltip {
   display: block;
 }
@@ -166,4 +242,6 @@ const deleteUser = () => {
   padding: 2rem;
   border-radius: 8px;
 }
+
+
 </style>

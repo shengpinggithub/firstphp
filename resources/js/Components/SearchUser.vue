@@ -15,11 +15,20 @@
       >
         By Email
       </div>
+      <div 
+        class="subtab" 
+        :class="{ active: activeSubtab === 'title' }" 
+        @click="activeSubtab = 'title'"
+      >
+        By Title
+      </div>
     </div>
 
     <div class="subtab-content">
       <search-by-id v-if="activeSubtab === 'id'" />
+      <edit-user-modal v-if="activeSubtab === 'id'" />
       <search-by-email v-if="activeSubtab === 'email'" />
+      <search-by-title v-if="activeSubtab === 'title'" />
     </div>
   </div>
 </template>
@@ -28,6 +37,8 @@
 import { ref } from 'vue'
 import SearchById from './SearchById.vue'
 import SearchByEmail from './SearchByEmail.vue'
+import SearchByTitle from './SearchByTitle.vue' 
+import EditUserModal from './EditUserModal.vue'
 
 const activeSubtab = ref('id')
 </script>
