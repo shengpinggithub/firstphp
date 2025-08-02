@@ -2,51 +2,90 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
-use App\Models\UserName;
-
 
 class InputController extends Controller
 {
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
+            'name'    => 'required|string|max:255',
             'address' => 'nullable|string|max:255',
+            'email'   => 'required|email|max:255',
+            'title'   => 'nullable|string|max:255',
+            'wage'    => 'nullable|numeric|min:0',
         ]);
 
-        $user = UserName::create($validated);
+        $user = User::create($validated);
 
-        return response()->json([
-            'name' => $user->name,
-            'address' => $user->address,
-        ]);
+        return response()->json($user, 201);
     }
 
-    public function showById($id)
+    public function show($id)
     {
-        $user = UserName::findById($id);
-        if (!$user) {
+        $user = User::find($id);
+
+        if (! $user) {
             return response()->json(['error' => 'User not found'], 404);
         }
 
-        return response()->json([
-            'name' => $user->name,
-            'address' => $user->address,
-        ]);
+        return response()->json($user);
     }
 
-    public function showByAddress($address)
+    public function showByEmail($email)
     {
-        $user = UserName::where('address', $address)->first();
+        $user = User::where('email', $email)->first();
 
-        if (!$user) {
+        if (! $user) {
             return response()->json(['error' => 'User not found'], 404);
         }
 
-        return response()->json([
-            'name' => $user->name,
-            'address' => $user->address,
+        return response()->json($user);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        if (! $user) {
+            return response()->json(['error' => 'User not found'], 404);
+        }
+
+        $validated = $request->validate([
+            'name'    => 'required|string|max:255',
+            'address' => 'nullable|string|max:255',
+            'email'   => 'required|email|max:255',
+            'title'   => 'nullable|string|max:255',
+            'wage'    => 'nullable|numeric|min:0',
         ]);
+
+        $user->update($validated);
+
+        return response()->json(['message' => 'User updated successfully']);
+    }
+
+    public function edit($id)
+    {
+        $user = User::find($id);
+
+        if (! $user) {
+            abort(404);
+        }
+
+        return view('user.edit', compact('user'));
+    }
+
+    public function destroy($id)
+    {
+        $user = User::find($id);
+
+        if (! $user) {
+            return response()->json(['error' => 'User not found'], 404);
+        }
+
+        $user->delete();
+
+        return response()->json(['message' => 'User deleted successfully']);
     }
 }

@@ -1,54 +1,63 @@
-<!-- SearchUser.vue -->
 <template>
   <div>
-    <h2>Search by ID</h2>
-    <input v-model="userId" type="number" placeholder="Enter User ID" />
-    <button @click="fetchUser">Search</button>
-  </div>
-  <div>
-    <h2>Search by Address</h2>
-    <input v-model="userAddress" type="string" placeholder="Enter User Address" />
-    <button @click="fetchUserByAddress">Search</button>
-  </div>
-  
-    <!-- 🔥 Unified Output Block -->
-  <div v-if="error" style="color: red">{{ error }}</div>
-  <div v-if="user">
-    <p><strong>Name:</strong> {{ user.name }}</p>
-    <p><strong>Address:</strong> {{ user.address || 'N/A' }}</p>
+    <div class="subtab-headers">
+      <div 
+        class="subtab" 
+        :class="{ active: activeSubtab === 'id' }" 
+        @click="activeSubtab = 'id'"
+      >
+        By ID
+      </div>
+      <div 
+        class="subtab" 
+        :class="{ active: activeSubtab === 'email' }" 
+        @click="activeSubtab = 'email'"
+      >
+        By Email
+      </div>
+    </div>
+
+    <div class="subtab-content">
+      <search-by-id v-if="activeSubtab === 'id'" />
+      <search-by-email v-if="activeSubtab === 'email'" />
+    </div>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
-import axios from 'axios'
+import SearchById from './SearchById.vue'
+import SearchByEmail from './SearchByEmail.vue'
 
-const userId = ref('')
-const userAddress = ref('')
-const user = ref(null)
-const error = ref('')
-
-const fetchUser = async () => {
-  error.value = ''
-  user.value = null
-  console.log(`Searching for user ID: ${userId.value}`)
-  try {
-    const response = await axios.get(`/search-user/id/${userId.value}`)
-    user.value = response.data
-  } catch (err) {
-    error.value = 'User not found'
-  }
-}
-
-const fetchUserByAddress = async () => {
-  error.value = ''
-  user.value = null
-  console.log(`Searching for user address: ${userAddress.value}`)
-  try {
-    const response = await axios.get(`/search-user/address/${userAddress.value}`)
-    user.value = response.data
-  } catch (err) {
-    error.value = 'User not found'
-  }
-}
+const activeSubtab = ref('id')
 </script>
+
+<style scoped>
+.subtab-headers {
+  display: flex;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 1rem;
+}
+
+.subtab {
+  flex: 1;
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #666;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.subtab.active {
+  color: #000;
+  border-bottom-color: #007bff;
+}
+
+.subtab-content {
+  background: #f2f2f2;
+  padding: 1rem;
+  border-radius: 6px;
+}
+</style>
