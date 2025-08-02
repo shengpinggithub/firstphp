@@ -1,5 +1,9 @@
 <template>
-<h2>Store Name to Database Api</h2>
+<h1>Store Name to Database Api</h1>
+<h2>1. php artisan serve</h2>
+<h2>2. npm run build</h2>
+<h2>3. npm run dev</h2>
+
   <div>
     <input v-model="name" placeholder="Enter your name" />
     <input v-model="address" placeholder="Enter your address" />
@@ -18,7 +22,7 @@ const message = ref('')
 
 const submitInputedName = async () => {
   try {
-    const response = await axios.post('/greet', { name: name.value, 
+    const response = await axios.post('/input', { name: name.value, 
         address: address.value
      })
     message.value = `Hello, ${response.data.name}!`
@@ -31,10 +35,3 @@ const submitInputedName = async () => {
 </script>
 
 
-<!-- <template>
-  <h2>Vue is working 🎉</h2>
-</template>
-
-<script setup>
-console.log('NameForm component loaded!')
-</script> -->

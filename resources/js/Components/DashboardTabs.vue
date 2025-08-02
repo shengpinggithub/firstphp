@@ -4,10 +4,10 @@
     <div class="tab-headers">
       <div 
         class="tab" 
-        :class="{ active: activeTab === 'greet' }" 
-        @click="activeTab = 'greet'"
+        :class="{ active: activeTab === 'input' }" 
+        @click="activeTab = 'input'"
       >
-        Greet
+        Input
       </div>
       <div 
         class="tab" 
@@ -19,7 +19,7 @@
     </div>
 
     <div class="tab-content">
-      <name-form v-if="activeTab === 'greet'" />
+      <home v-if="activeTab === 'input'" />
       <search-user v-if="activeTab === 'search'" />
     </div>
   </div>
@@ -27,10 +27,10 @@
 
 <script setup>
 import { ref } from 'vue'
-import NameForm from './NameForm.vue'
+import Home from './Home.vue'
 import SearchUser from './SearchUser.vue'
 
-const activeTab = ref('greet')
+const activeTab = ref('input')
 </script>
 
 <style scoped>

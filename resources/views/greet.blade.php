@@ -7,7 +7,7 @@
 
 <body>
     <div id="app">
-        <name-form />
+        <home />
     </div>
 </body>
 </html>

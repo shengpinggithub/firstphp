@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\UserName;
 
 
-class GreetController extends Controller
+class InputController extends Controller
 {
     public function store(Request $request)
     {
