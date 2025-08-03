@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Search by Address</h2>
+    <h2>Search by Email</h2>
     <input v-model="userEmail" type="text" placeholder="Enter Email" />
     <button @click="fetchUserByEmail">Search</button>
 
