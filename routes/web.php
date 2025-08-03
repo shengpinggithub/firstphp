@@ -16,7 +16,12 @@ Route::get('/search', fn () => view('search'));
 
 Route::get('/search-user/id/{id}', [InputController::class, 'show'])->name('user.search.id');
 Route::get('/search-user/email/{email}', [InputController::class, 'showByEmail'])->name('user.search.email');
-Route::get('/search-user/title/{title}', [InputController::class, 'searchByTitle'])->name('user.search.title');
+//Route::get('/search-user/title/{title}', [InputController::class, 'searchByTitle'])->name('user.search.title');
+
+// ✅ New version — uses query string
+Route::get('/search-user/title', [InputController::class, 'searchByTitle']);
+
+
 
 
 // Dashboard view

@@ -89,15 +89,36 @@ class InputController extends Controller
         return response()->json(['message' => 'User deleted successfully']);
     }
 
-    public function searchByTitle($title)
-    {
-        $users = User::where('title', 'like', '%' . $title . '%')->get();
+    // public function searchByTitle($title)
+    // {
+    //     $users = User::where('title', 'like', '%' . $title . '%')->get();
 
-        if ($users->isEmpty()) {
-            return response()->json(['error' => 'No users found'], 404);
+    //     if ($users->isEmpty()) {
+    //         return response()->json(['error' => 'No users found'], 404);
+    //     }
+
+    //     return response()->json($users);
+    // }
+
+    public function searchByTitle(Request $request)
+    {
+        $title = $request->query('title');
+
+        if (!$title || !is_string($title)) {
+            return response()->json([
+                'error' => 'Missing or invalid title query.'
+            ], 400);
         }
 
-        return response()->json($users);
+        $users = User::where('title', 'LIKE', "%{$title}%")
+            ->select('id', 'name', 'address', 'email', 'title', 'wage')
+            ->orderBy('id', 'desc')
+            ->take(20)
+            ->get();
+
+        return response()->json([
+            'users' => $users
+        ]);
     }
 
 }
