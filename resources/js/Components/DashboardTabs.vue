@@ -1,5 +1,5 @@
 <template>
-<p style="text-align: center; font-size: 36px;">Great Beautiful Api</p>
+<p style="text-align: center; font-size: 36px;">SP Learning Api Project</p>
   <div class="tabs">
     <div class="tab-headers">
       <div 

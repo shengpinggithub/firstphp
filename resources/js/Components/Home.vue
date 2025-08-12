@@ -1,5 +1,6 @@
 <template>
-<h1>Store Name to Database Api</h1>
+<h1>Store Name to Database</h1>
+<h2>Steps to launch the url:</h2>
 <h2>1. php artisan serve</h2>
 <h2>2. npm run build</h2>
 <h2>3. npm run dev</h2>
